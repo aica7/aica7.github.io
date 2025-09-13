@@ -1,0 +1,11 @@
+/* File defining font faces to use on the websites page */
+
+@font-face {
+  font-family: 'IBM Plex Sans Variable',
+  src: url("../fonts/IBM_Plex/IBMPlexSansVariable.ttf")
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans Italic',
+  src: url("../fonts/IBM_Plex/IBMPlexSansItalic.ttf")
+}

@@ -1,0 +1,41 @@
+body {
+  font-family: "FreeMono, monospace";
+  border-style: solid;
+  border-radius: 15px;
+}
+
+/* Defines properties of the header containin the page links */
+.header {
+  display: grid;
+}
+
+/* Indicates a page link, an area on the top of the website page containing svg 
+ * icons and text. It is interactable and clicking on it will redirect to another
+ * page on the site */
+.page-link {
+  position: sticky;
+  top: 15px;
+  padding: 1em;
+  margin-left: 20em;
+  margin-right: 20em;
+}
+
+/* Defines the page link paragraph text placed within the page link icons to
+ * indicate where the page link will redirect to */
+.page-link a {
+  font-family: "IBM Plex Sans Variable";
+  font-size: 2em;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Defines the properties of an icon on the page link */
+.page-link .icon {
+  position: relative;
+  margin: auto 10%;
+}
+
+/* The properties of hovering mouse over a page link */
+.page-link a:hover {
+  text-decoration: underline;
+}
