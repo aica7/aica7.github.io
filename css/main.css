@@ -1,12 +1,17 @@
+/* Import css document containing font style information */
+@import url("fonts.css");
+
 body {
   font-family: "FreeMono, monospace";
   border-style: solid;
   border-radius: 15px;
 }
 
-/* Defines properties of the header containin the page links */
+/* Defines properties of the header containing the page links */
 .header {
   display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
 }
 
 /* Indicates a page link, an area on the top of the website page containing svg 
@@ -30,7 +35,7 @@ body {
 }
 
 /* Defines the properties of an icon on the page link */
-.page-link .icon {
+.page-link img {
   position: relative;
   margin: auto 10%;
 }
