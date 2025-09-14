@@ -28,10 +28,12 @@ body {
 /* Defines the page link paragraph text placed within the page link icons to
  * indicate where the page link will redirect to */
 .page-link a {
-  font-family: "IBM Plex Sans Variable";
-  font-size: 2em;
+  /* font-family: "IBM Plex Sans", sans-serif; */
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1em;
   color: #ffffff;
   text-align: center;
+  text-decoration: none;
 }
 
 /* Defines the properties of an icon on the page link */
