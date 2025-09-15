@@ -1,7 +1,17 @@
 /* Import css document containing font style information */
 @import url("fonts.css");
 
-/* Defines properties of the body html element
+/* Defines properties of the body html element */
+body {
+}
+
+/* Defines default text properties of the p and all header elements */
+p,
+h1, h2, h3, h4, h5, h6 {
+  font-family: Noto Sans, sans-serif;
+  font-weight: bold;
+  color: #ffffff;
+}
 
 /* Defines properties of the header containing the page links */
 .header {
@@ -39,4 +49,64 @@
 .page-link img {
   position: relative;
   margin: auto 8%;
+}
+
+/* A panel is considered a container on the web page hosting relative information such as
+ * profile information, rss feed etc */
+.panel {
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr);
+  /* below two properties are a test remove later */
+  width: 500px;
+  max-width: 100%;
+  height: 350px;
+  background-color: #141414;
+  border: solid;
+  border-color: #636363; 
+  border-width: 3px;
+  border-radius: 39px; 
+}
+
+/* ID defining the child class for the top section of the info container within our top left panel */
+#top-info-container {
+  grid-template-columns: auto 1fr;
+  display: grid;
+  position: relative;
+  grid-row: 1 / span 3;
+  grid-column: 1 / span 9;
+}
+
+/* ID defining the section within the top info container storing the profile picture */
+#profile-picture-section {
+  position: relative;
+  grid-row-start: 1 / span 3;
+  grid-column-start: 1 / span 3;
+  padding-left: 17px;
+  padding-top: 12px;
+}
+
+/* Defines the image property within the profile picture section */
+#profile-picture-section img {
+  position: relative;
+  width: 125px;
+  height: 125px;
+  border: solid;
+  border-color: #636363; 
+  border-width: 3px;
+  border-radius: 70px;
+  object-fit: cover;
+  padding: 1px;
+}
+
+/* ID defining section containing full name and other tags */
+#top-info-section {
+  grid-column: 4 / span 6;
+  grid-row: 1 / span 3;
+}
+
+#top-info-section p {
+  line-height: 0.5em;
+  font-size: 32px;
+  padding-left: 20px;
 }
