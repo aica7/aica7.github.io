@@ -1,48 +1,42 @@
 /* Import css document containing font style information */
 @import url("fonts.css");
 
-body {
-  font-family: "FreeMono, monospace";
-  border-style: solid;
-  border-radius: 15px;
-}
+/* Defines properties of the body html element
 
 /* Defines properties of the header containing the page links */
 .header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 /* Indicates a page link, an area on the top of the website page containing svg 
  * icons and text. It is interactable and clicking on it will redirect to another
  * page on the site */
 .page-link {
+  display: flex;
   position: sticky;
-  top: 15px;
-  padding: 1em;
-  margin-left: 20em;
-  margin-right: 20em;
+  top: 5px;
 }
 
 /* Defines the page link paragraph text placed within the page link icons to
  * indicate where the page link will redirect to */
 .page-link a {
-  /* font-family: "IBM Plex Sans", sans-serif; */
-  font-family: "Times New Roman", Times, serif;
-  font-size: 1em;
+  position: relative;
+  font-family: 'IBMPlexMono', sans-serif;
+  font-size: 1.2em;
   color: #ffffff;
   text-align: center;
   text-decoration: none;
 }
 
-/* Defines the properties of an icon on the page link */
-.page-link img {
-  position: relative;
-  margin: auto 10%;
-}
-
 /* The properties of hovering mouse over a page link */
 .page-link a:hover {
   text-decoration: underline;
+}
+
+/* Defines the properties of an icon on the page link */
+.page-link img {
+  position: relative;
+  margin: auto 8%;
 }
