@@ -106,7 +106,28 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #top-info-section p {
-  line-height: 0.5em;
-  font-size: 32px;
-  padding-left: 20px;
+  font-size: 18px;
+}
+
+#top-info-section h1 {
+  margin-bottom: 0;
+}
+
+/* Tag class defines a coloured and slightly rounded box resized to contain text.
+ * Usually used for displaying one word (or phrase) references */
+.tag {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 15px;
+  font-weight: 600;
+}
+
+/* Text properties for tag */
+.tag p {
+  line-height: 0.2em;
+  border: solid;
+  border-radius: 7px;
+  padding: 3% 2% 3% 2%;
+  text-align: center;
+  width: fit-content;
 }
