@@ -8,50 +8,56 @@
   </head>
   <!-- charcoal grey: #232023 -->
   <body style="background-color:#222222">
-    <!-- header will contain all of the links to different areas of the page -->
-    <div class=header>
-      <div class=page-link>
-        <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/home_icon.svg" width="25" height="25" alt="home_icon"></img>
-        <a href="https://aica7.github.io/index.html">/home/</a>
-        <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/home_icon.svg" width="25" height="25" alt="home_icon"></img>
-      </div>
-      <div class=page-link>
-        <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/info_icon.svg" width="25" height="25" alt="info_icon"></img>
-        <a href="https://aica7.github.io/about.html">/about/</a>
-        <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/info_icon.svg" width="25" height="25" alt="info_icon"></img>
-      </div>
-      <div class=page-link>
-        <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/rss_icon.svg" width="25" height="25" alt="rss_icon"></img>
-        <a href="https://aica7.github.io/rss.html">/rss/</a>
-        <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/rss_icon.svg" width="25" height="25" alt="rss_icon"></img>
-      </div>
-    </div>
+    <!-- header will contain a nav with all of the links to different areas of the page -->
+    <header>
+      <nav>
+        <span class=page-link>
+          <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/home_icon.svg" width="25" height="25" alt="home_icon"></img>
+          <a href="https://aica7.github.io/index.html">/home/</a>
+          <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/home_icon.svg" width="25" height="25" alt="home_icon"></img>
+        </span>
+        <span class=page-link>
+          <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/info_icon.svg" width="25" height="25" alt="info_icon"></img>
+          <a href="https://aica7.github.io/about.html">/about/</a>
+          <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/info_icon.svg" width="25" height="25" alt="info_icon"></img>
+        </span>
+        <span class=page-link>
+          <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/rss_icon.svg" width="25" height="25" alt="rss_icon"></img>
+          <a href="https://aica7.github.io/rss.html">/rss/</a>
+          <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/rss_icon.svg" width="25" height="25" alt="rss_icon"></img>
+        </span>
+      </nav>
+    </header>
     <!-- Define our first top left panel containing information about the user and more -->
     <br>
-    <div class=panel-container>
-      <div class=panel style="grid-area:tlpanel;">
-        <!-- Arbritrary container defining properties for the top panel -->
-        <div id=top-info-container>
-          <div id=profile-picture-section>
-            <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/imgs/snow_raven.jpg">
-          </div>
-          <div id=top-info-section>
-            <h1>Aidan Catchpool</h1>
-            <!-- Override default gap, padding and line height properties for tag below name -->
-            <div class=tag style="column-gap:35px;margin-top:-6px;padding-left:5px;">
-              <p style="border-color:#bf8bff;background-color:#bf8bff;">aica</p>
-              <p style="border-color:#a22adf;background-color:#a22adf;">he/him</p>
+    <main>
+      <div class=panel-container>
+        <div class=panel style="grid-area:tlpanel;">
+          <!-- Arbritrary container defining properties for the top panel -->
+          <div id=top-info-container>
+            <div id=profile-picture-section>
+              <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/imgs/snow_raven.jpg">
             </div>
-            <div class=tag style="margin-top:-12px;">
-              <p style="border-width:2px;font-size:14px;border-color:#636363;background-color:#282828;">programming • electronics • student</p>
+            <div id=top-info-section>
+              <h1>Aidan Catchpool</h1>
+              <!-- Override default gap, padding and line height properties for tag below name -->
+              <div class=tag style="column-gap:35px;margin-top:-6px;padding-left:5px;">
+                <p style="border-color:#bf8bff;background-color:#bf8bff;">aica</p>
+                <p style="border-color:#a22adf;background-color:#a22adf;">he/him</p>
+              </div>
+              <span class=tag style="margin-top:-12px;">
+                <p style="border-width:2px;font-size:14px;border-color:#636363;background-color:#282828;">programming • electronics • student</p>
+              </span>
             </div>
           </div>
         </div>
+        <div class=panel style="grid-area:midpanel;"></div>
+        <div class=panel style="grid-area:trpanel;"></div>
+        <div class=panel style="grid-area:blpanel;"></div>
+        <div class=panel style="grid-area:brpanel;"></div>
       </div>
-      <div class=panel style="grid-area:midpanel;"></div>
-      <div class=panel style="grid-area:trpanel;"></div>
-      <div class=panel style="grid-area:blpanel;"></div>
-      <div class=panel style="grid-area:brpanel;"></div>
-    </div>
+    </main>
+    <footer>
+    </footer>
   </body>
 </html>

@@ -31,10 +31,10 @@ h1, h2, h3, h4, h5, h6 {
   color: #ffffff;
 }
 
-/* Defines properties of the header containing the page links */
-.header {
+/* Defines properties of the header nav with page links */
+header nav {
   display: flex;
-  flex-direction: row;
+  align-items: center;
   justify-content: space-around;
 }
 
@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
  * icons and text. It is interactable and clicking on it will redirect to another
  * page on the site */
 .page-link {
-  display: flex;
+  display: inline-flex;
   position: sticky;
   top: 5px;
 }
@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Defines the page link paragraph text placed within the page link icons to
  * indicate where the page link will redirect to */
 .page-link a {
-  position: relative;
+  position: inline-flex;
   font-family: 'IBMPlexMono', sans-serif;
   font-size: 1.2em;
   color: #ffffff;
