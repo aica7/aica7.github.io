@@ -5,6 +5,22 @@
 body {
 }
 
+/* Container class for all panels, sitting between the header and footer */
+.panel-container {
+  display: grid;
+  margin: 0px;
+  grid-gap: 10px 20px;
+  width: 100vh;
+  height: 90vh;
+  grid-template-areas:
+    "tlpanel midpanel trpanel"
+    "blpanel midpanel brpanel";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 50%);
+  justify-content: space-evenly;
+  margin: 0 3em;
+}
+
 /* Defines default text properties of the p and all header elements */
 p,
 h1, h2, h3, h4, h5, h6 {
@@ -57,15 +73,14 @@ h1, h2, h3, h4, h5, h6 {
   display: grid;
   grid-template-rows: repeat(10, 1fr);
   grid-template-columns: repeat(10, 1fr);
-  /* below two properties are a test remove later */
+  background-color: #141414;
   width: 500px;
   max-width: 100%;
-  height: 350px;
-  background-color: #141414;
+  max-height: 100%;
   border: solid;
   border-color: #636363; 
   border-width: 3px;
-  border-radius: 39px; 
+  border-radius: 40px; 
 }
 
 /* ID defining the child class for the top section of the info container within our top left panel */
@@ -131,3 +146,4 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   width: fit-content;
 }
+
