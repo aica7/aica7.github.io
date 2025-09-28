@@ -7,23 +7,29 @@
     <title>Aica's Personal Website</title>
   </head>
   <!-- charcoal grey: #232023 -->
-  <body style="background-color:#222222">
+  <body>
     <!-- header will contain a nav with all the links to different areas of the page -->
     <header>
       <nav>
         <span class=page-link>
           <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/home_icon.svg" width="25" height="25" alt="home_icon"></img>
-          <a href="https://aica7.github.io/index.html">/home/</a>
+          <a href="https://aica7.github.io/index.html">
+            /home
+          </a>
           <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/home_icon.svg" width="25" height="25" alt="home_icon"></img>
         </span>
         <span class=page-link>
           <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/info_icon.svg" width="25" height="25" alt="info_icon"></img>
-          <a href="https://aica7.github.io/about.html">/about/</a>
+          <a href="https://aica7.github.io/about.html">
+            /about
+          </a>
           <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/info_icon.svg" width="25" height="25" alt="info_icon"></img>
         </span>
         <span class=page-link>
           <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/rss_icon.svg" width="25" height="25" alt="rss_icon"></img>
-          <a href="https://aica7.github.io/rss.html">/rss/</a>
+          <a href="https://aica7.github.io/rss.html">
+            /rss
+          </a>
           <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/icons/rss_icon.svg" width="25" height="25" alt="rss_icon"></img>
         </span>
       </nav>
@@ -32,29 +38,24 @@
     <br>
     <main>
       <div class=panel-container>
-        <div class=panel style="grid-area:tlpanel;justify-self:start;">
+        <div class=panel>
           <!-- Arbritrary container defining properties for the top panel -->
-          <div id=top-info-container>
-            <div id=profile-picture-section>
-              <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/imgs/snow_raven.jpg">
+          <section id=profile-picture-section>
+            <img src="https://raw.githubusercontent.com/aica7/aica7.github.io/main/assets/imgs/snow_raven.jpg">
+          </section>
+          <section id=top-info-section>
+            <h1>Aidan Catchpool</h1>
+            <!-- Override default gap, padding and line height properties for tag below name -->
+            <div class=tag style="column-gap:10px;margin-top:-2px;padding-left:5px;">
+              <p style="border-color:#8479d9;background-color:#8479d9;">
+                aica
+              </p>
+              <p style="border-width:2px;border-color:#636363;background-color:#282828;">
+                programming • electronics • student
+              </p>
             </div>
-            <div id=top-info-section>
-              <h1>Aidan Catchpool</h1>
-              <!-- Override default gap, padding and line height properties for tag below name -->
-              <div class=tag style="column-gap:35px;margin-top:-6px;padding-left:5px;">
-                <p style="border-color:#bf8bff;background-color:#bf8bff;">aica</p>
-                <p style="border-color:#a22adf;background-color:#a22adf;">he/him</p>
-              </div>
-              <span class=tag style="margin-top:-12px;">
-                <p style="border-width:2px;font-size:14px;border-color:#636363;background-color:#282828;">programming • electronics • student</p>
-              </span>
-            </div>
-          </div>
+          </section>
         </div>
-        <div class=panel style="grid-area:midpanel;justify-self:center;width:750px;%;"></div>
-        <div class=panel style="grid-area:trpanel;justify-self:end;"></div>
-        <div class=panel style="grid-area:blpanel;justify-self:start;"></div>
-        <div class=panel style="grid-area:brpanel;justify-self:end;"></div>
       </div>
     </main>
     <footer>
