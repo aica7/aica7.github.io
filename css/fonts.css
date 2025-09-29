@@ -27,3 +27,31 @@
   font-weight: normal;
   font-style: italic;
 }
+
+@font-face {
+  font-family: 'RobotoMono';
+  src: url("../fonts/RobotoMono/RobotoMonoNerdFont-Regular.ttf") format("truetype");
+  font-weight: lighter;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMono';
+  src: url("../fonts/RobotoMono/RobotoMonoNerdFont-Italic.ttf") format("truetype");
+  font-weight: lighter;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'RobotoMono';
+  src: url("../fonts/RobotoMono/RobotoMonoNerdFont-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMono';
+  src: url("../fonts/RobotoMono/RobotoMonoNerdFont-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
