@@ -156,6 +156,48 @@ header nav {
   gap: 8px;
 }
 
+#clock-section {
+  grid-column: 5 / span 6;
+  grid-row: 3 / span 3;
+  justify-content: space-between;
+}
+
+#clock-section .text-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#clock-section .text-section p {
+  font-family: Noto Sans, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.clock {
+  display: flex;
+  align-items: center;
+  width: 90px;
+  height: 90px;
+  margin-left: 55px;
+  margin-top: 40px;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+#inner-clock-circle {
+  /*
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 3px;
+  height: 3px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid black;
+  */
+}
+
 #terminal-icon {
   display: inline-block;
 }

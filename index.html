@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+    <script type="text/javascript" src="js/clock.js"></script>
     <title>Aica's Personal Website</title>
   </head>
   <!-- charcoal grey: #232023 -->
@@ -88,6 +89,26 @@
               </p>
             </div>
           </section>
+          <section id=clock-section>
+            <div style="display:flex;">
+              <svg class=clock width="90" height="90" xmlns="http://www.w3.org/2000/svg">
+                <circle id=inner-clock-circle cx="45" cy="45" r="2"
+                stroke="black" stroke-width="2" fill-opacity=0></circle>
+              </svg>
+              <svg class=clock width="90" height="90" xmlns="http://www.w3.org/2000/svg">
+                <circle id=inner-clock-circle cx="45" cy="45" r="2" 
+                stroke="black" stroke-width="2" fill-opacity=0></circle>
+              </svg>
+            </div>
+            <div style="display:flex;padding-left:55px;gap:60px;">
+              <div class=text-section>
+                <p>Server's time</p>  
+              </div>
+              <div class=text-section>
+                <p>Client's time</p>
+              </div>
+            </div>
+          <section>
         </div>
       </div>
     </main>
