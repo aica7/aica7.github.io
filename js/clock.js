@@ -1,60 +1,59 @@
 // Clock operations performed in JS
 const clocks = document.querySelectorAll('.clock');
-//const liveLocalTime = document.getElementByID('aicaTime');
-//const liveClientTime = document.getElementByID('clientTime');
 
 const drawLine = function(clockElement, handLength, lineStyle) {
-    if (!clockElement || clockElement.tagName != 'SVG'){return;}
-    // Set dimensions set on the clockElement properties
+    console.log("in drawLine function");
+    if (!clockElement || clockElement.tagName != 'svg'){return;}
     if (!clockElement.hasAttribute("width") || !clockElement.hasAttribute("height")){
         clockElement.width = window.getComputedStyle(clock).width;
         clockElement.height = window.getComputedStyle(clock).height;
     }
-    // Create our path element
-    var pathElement = document.createElement("path");
+    var pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
     var innerCircle = (clocks[0]).querySelector("#inner-clock-circle");
-    // Defining path attributes to create vertical up line
-    pathElement.d = `
-        M${clockElement.width/2} ${clockElement.height/2 - innerCircle.style.height/2}      
-        L${clockElement.width/2} ${handLength}
-    ` 
-    // Assign style properties to the path element
+    pathElement.setAttribute("d", `
+        M${$(clockElement).attr('width')/2} ${$(clockElement).attr('height')/2 - $(innerCircle).attr('r')/2}      
+        L${$(clockElement).attr('width')/2} ${handLength}
+    `)
     Object.assign(pathElement.style, lineStyle);
-    // Append the path element as a child to the analogClockHands div
-    clockElement.getElementsByTagName("div")[0].appendChild(pathElement);
+    clockElement.getElementsByTagName("g")[0].appendChild(pathElement);
 }   
 
-// Initialise other clock visuals
-clocks.forEach(clock => {
-    const clockStyle = window.getComputedStyle(clock); // return object containing all CSS properties  
-    const innerCircle = clock.querySelector("#inner-clock-circle");
-    let width = clockStyle.width;
-    
-    // Initialise clock hands as paths relative to the top of the parent frame
-    var analogClockHands = document.createElement("div");
-    clock.appendChild(analogClockHands);
-    var mainHandStyles = {
-        fill: "none",
-        stroke: "black",
-        "stroke-width": "3px",
-    }
-    drawLine(
-        clock, window.getComputedStyle(clock).height/2 - 10,
-        {
+// Initialise other clock visuals,
+window.onload = function() {
+    console.log("Initialising other clock visuals");
+    console.log(clocks);
+    clocks.forEach(clock => {
+        const clockStyle = window.getComputedStyle(clock); // return object containing all CSS properties  
+        const innerCircle = clock.querySelector("#inner-clock-circle");
+        let width = clockStyle.width;
+        
+        // Initialise clock hands as paths relative to the top of the parent frame
+        var analogClockHands = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        clock.appendChild(analogClockHands);
+        var mainHandStyles = {
             fill: "none",
-            stroke: "red",
-            "stroke-width": "1px",
+            stroke: "black",
+            "stroke-width": "2px",
         }
-    )
-    drawLine(
-        clock, window.getComputedStyle(clock).height/2 - 10,
-        mainHandStyles
-    )
-    drawLine( // Hour hand
-        clock, window.getComputedStyle(clock).height/2 - 20,
-        mainHandStyles
-    )
-});
+        drawLine(
+            clock, $(clock).attr('height')/2 - 40,
+            {
+                fill: "none",
+                stroke: "red",
+                "stroke-width": "1px",
+            }
+        )
+        drawLine(
+            clock, $(clock).attr('height')/2 - 40,
+            mainHandStyles
+        )
+        drawLine( // Hour hand
+            clock, $(clock).attr('height')/2 - 35,
+            mainHandStyles
+        )
+        console.log("Done clock");
+    });
+}
 
 function clientTimezoneData(){
     return new Promise((resolve) => {
