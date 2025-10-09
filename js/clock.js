@@ -5,8 +5,8 @@ const drawLine = function(clockElement, handLength, lineStyle) {
     console.log("in drawLine function");
     if (!clockElement || clockElement.tagName != 'svg'){return;}
     if (!clockElement.hasAttribute("width") || !clockElement.hasAttribute("height")){
-        clockElement.width = window.getComputedStyle(clock).width;
-        clockElement.height = window.getComputedStyle(clock).height;
+        $(clockElement).attr('width', window.getComputedStyle(clocks[0]).width);
+        $(clockElement).attr('height', window.getComputedStyle(clocks[0]).height);
     }
     var pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
     var innerCircle = (clocks[0]).querySelector("#inner-clock-circle");
@@ -17,6 +17,26 @@ const drawLine = function(clockElement, handLength, lineStyle) {
     Object.assign(pathElement.style, lineStyle);
     clockElement.getElementsByTagName("g")[0].appendChild(pathElement);
 }   
+
+function clockTextOffset(clockObj, iterNo, edgeOffset){
+    // TODO: maybe throw an error?
+    if (iterNo < 0 && iterNo > 11){return;}
+    // The svg group containing the clock text is the second one
+    const clockTextGroup = clockObj.getElementsByTagName("g")[0];
+    const clockText = $(clockTextGroup).get(iterNo);
+
+    const angle = ((2 * Math.PI) / 12) * (iterNo+3); // Offset by 3 to put 12 on top
+    if (clockObj.hasAttribute('width') && clockObj.hasAttribute('height')){
+        return new Promise((resolve) => {
+            resolve( // The below is a `hack` as 12 is slightly offset to the right
+                [(($(clockObj).attr('width')/2 - edgeOffset)*Math.cos(angle))
+                 + (iterNo == 12 ? 3 : 0),
+                 (($(clockObj).attr('height')/2 - edgeOffset)*Math.sin(angle))
+                 + (iterNo == 12 ? -2 : 0)]
+            )
+        });
+    }
+}
 
 // Initialise other clock visuals,
 window.onload = function() {
@@ -33,7 +53,7 @@ window.onload = function() {
         var mainHandStyles = {
             fill: "none",
             stroke: "black",
-            "stroke-width": "2px",
+            "stroke-width": "1px",
         }
         drawLine(
             clock, $(clock).attr('height')/2 - 40,
@@ -51,6 +71,27 @@ window.onload = function() {
             clock, $(clock).attr('height')/2 - 35,
             mainHandStyles
         )
+        
+        // Creating and positioning the clock numbers
+        var clockNumberGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        clock.appendChild(clockNumberGroup);
+        async function addClockNumberText(group, iterNo){
+            let edgeOffset = 7;
+            var textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            const offset = await clockTextOffset(clock, iterNo, edgeOffset);
+            $(textElement).attr({
+                'fill': '#636363',
+                'font-size': '11px',
+                'font-family': 'Arial',
+                'x': `${($(clock).attr('width')/2 - offset[0]) - 3}`,
+                'y': `${($(clock).attr('height')/2 - offset[1]) + 2}`
+            }).text(`${iterNo}`);
+            $(group).append(textElement);
+        }
+        for (let i = 1; i < 13; i++){
+            addClockNumberText(clockNumberGroup, i);
+        }
+
         console.log("Done clock");
     });
 }
