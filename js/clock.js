@@ -2,7 +2,6 @@
 const clocks = document.querySelectorAll('.clock');
 
 const drawLine = function(clockElement, handLength, lineStyle) {
-    console.log("in drawLine function");
     if (!clockElement || clockElement.tagName != 'svg'){return;}
     if (!clockElement.hasAttribute("width") || !clockElement.hasAttribute("height")){
         $(clockElement).attr('width', window.getComputedStyle(clocks[0]).width);
@@ -38,10 +37,49 @@ function clockTextOffset(clockObj, iterNo, edgeOffset){
     }
 }
 
+function clientTimezoneData(){
+    return new Promise((resolve) => {
+        const dtformat = new Intl.DateTimeFormat();
+        resolve(dtformat.resolvedOptions().timeZone);
+    });
+}
+
+function serverTimezoneData(){
+    return new Promise((resolve) => {
+        const dtformat = new Intl.DateTimeFormat("en-GB");
+        resolve(dtformat.resolvedOptions().timeZone);
+    });
+}
+
+// Retrieve and format the timezone data on labels correctly
+async function formatTimezoneData(){
+    setInterval(async () => {
+        const serverTzData = await serverTimezoneData();
+        const clientTzData = await clientTimezoneData();
+        const tzones = [serverTzData, clientTzData];
+
+        let tagContainer = document.getElementById("clock-section")
+            .getElementsByTagName("div")[1]
+        let timeSections = tagContainer.querySelectorAll(".text-section");
+        console.log(timeSections);
+        // The order of the specific contents tags is important
+        let now = Date.now();
+        timeSections.forEach((timeSection, i) => {
+            timeSection.textContent = `${
+                new Intl.DateTimeFormat("en-GB", {
+                    timeZone: tzones[i],
+                    weekday: "long",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                }).format(now)
+            }`
+        })
+    }, 1000);
+}
+
 // Initialise other clock visuals,
 window.onload = function() {
-    console.log("Initialising other clock visuals");
-    console.log(clocks);
     clocks.forEach(clock => {
         const clockStyle = window.getComputedStyle(clock); // return object containing all CSS properties  
         const innerCircle = clock.querySelector("#inner-clock-circle");
@@ -91,62 +129,16 @@ window.onload = function() {
         for (let i = 1; i < 13; i++){
             addClockNumberText(clockNumberGroup, i);
         }
-
+        
+        // Formatting the timezone data (TEST for now)
+        formatTimezoneData();
         console.log("Done clock");
     });
 }
 
-function clientTimezoneData(){
-    return new Promise((resolve) => {
-        const dtformat = new Intl.DateTimeFormat();
-        resolve(dtformat.resolvedOptions().timeZone);
-    });
-}
-
-function serverTimezoneData(){
-    return new Promise((resolve) => {
-        const dtformat = new Intl.DateTimeFormat("en-GB");
-        resolve(dtformat.resolvedOptions().timeZone);
-    });
-}
-
-// Retrieve and format the timezone data on labels correctly
-async function formatTimezoneData(){
-    setTimeout(async () => {
-        const serverTzData = await serverTimezoneData();
-        const clientTzData = await clientTimezoneData();
-        const tzones = [serverTzData, clientTzData];
-
-        let timeSections = document.getElementById(
-            "clock-section").querySelectorAll("#time-section");
-        // The order of the specific contents tags is impor
-        timeSections.forEach((timeSection, i) => {
-            timeSection.textContent = `${
-                new Intl.DateTimeFormat("en-GB", {
-                    timeZone: tzones[i],
-                    weekday: "long",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                }).format(now)
-            }`
-        })
-    }, 1000);
-}
-
 // TODO: ALL BELOW ->
 //
-// Add in the inner circle svg and respective clock hand as path element tags
-//
-// Retrieve the time local time for aica
-//
-// Attempt to retrieve the clients timezone
-//
 // If not available, hide clients clock and reposition aica clock
-//
-// Write the numbers on each clock at fixed interval positions around frame
-//
-// Write the time in 24 hour format below each clock
 //
 // Apply initial transform values to the second hand to the location it needs to be at
 //

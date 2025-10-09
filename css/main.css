@@ -163,15 +163,16 @@ header nav {
 }
 
 #clock-section .text-section {
+  font-family: Noto Sans, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
   position: relative;
   display: flex;
   align-items: center;
+  color: white;
 }
 
 #clock-section .text-section p {
-  font-family: Noto Sans, sans-serif;
-  font-weight: normal;
-  font-size: 16px;
 }
 
 .clock {
