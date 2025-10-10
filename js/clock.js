@@ -1,16 +1,16 @@
 // Clock operations performed in JS
 const clocks = document.querySelectorAll('.clock');
 
-const drawLine = function(clockElement, handLength, lineStyle) {
+const createLine = function(clockElement, handLength, lineStyle) {
     if (!clockElement || clockElement.tagName != 'svg'){return;}
     if (!clockElement.hasAttribute("width") || !clockElement.hasAttribute("height")){
         $(clockElement).attr('width', window.getComputedStyle(clocks[0]).width);
         $(clockElement).attr('height', window.getComputedStyle(clocks[0]).height);
     }
-    var pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    var innerCircle = (clocks[0]).querySelector("#inner-clock-circle");
+    const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const innerCircle = (clocks[0]).querySelector("#inner-clock-circle");
     pathElement.setAttribute("d", `
-        M${$(clockElement).attr('width')/2} ${$(clockElement).attr('height')/2 - $(innerCircle).attr('r')/2}      
+        M${$(clockElement).attr('width')/2} ${$(clockElement).attr('height')/2}      
         L${$(clockElement).attr('width')/2} ${handLength}
     `)
     Object.assign(pathElement.style, lineStyle);
@@ -53,29 +53,56 @@ function serverTimezoneData(){
 
 // Retrieve and format the timezone data on labels correctly
 async function formatTimezoneData(){
-    setInterval(async () => {
-        const serverTzData = await serverTimezoneData();
-        const clientTzData = await clientTimezoneData();
-        const tzones = [serverTzData, clientTzData];
+    const serverTzData = await serverTimezoneData();
+    const clientTzData = await clientTimezoneData();
+    const tzones = [serverTzData, clientTzData];
 
-        let tagContainer = document.getElementById("clock-section")
-            .getElementsByTagName("div")[1]
-        let timeSections = tagContainer.querySelectorAll(".text-section");
-        console.log(timeSections);
-        // The order of the specific contents tags is important
-        let now = Date.now();
-        timeSections.forEach((timeSection, i) => {
-            timeSection.textContent = `${
-                new Intl.DateTimeFormat("en-GB", {
-                    timeZone: tzones[i],
-                    weekday: "long",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                }).format(now)
-            }`
-        })
-    }, 1000);
+    let tagContainer = document.getElementById("clock-section")
+        .getElementsByTagName("div")[1]
+    let timeSections = tagContainer.querySelectorAll(".text-section");
+    // The order of the specific contents tags is important
+    let now = Date.now();
+    timeSections.forEach((timeSection, i) => {
+        timeSection.textContent = `${
+            new Intl.DateTimeFormat("en-GB", {
+                timeZone: tzones[i],
+                weekday: "short",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+            }).format(now)
+        }`
+    })
+}
+
+// Transform the clock hands to their specified positions after receiving time data
+function transformClockHands(){
+    // Initial transform for all three hands
+    clocks.forEach(clock => {
+        // Get the initial position of each clock hand
+        const analogHandGroup = clock.getElementsByTagName("g")[0];
+        const analogHandPaths = analogHandGroup.getElementsByTagName("path");             
+        // Set the intervals of each clock hand with their specific angles
+        $(analogHandPaths[0]).css('transform-origin', '50% 100%');
+        $(analogHandPaths[1]).css('transform-origin', '50% 100%');
+        $(analogHandPaths[2]).css('transform-origin', '50% 100%');
+        setInterval(() => {
+            let date = new Date();
+            const hour = date.getHours();
+            const minute = date.getMinutes();
+            const second = date.getSeconds();
+            $(analogHandPaths[0]).css('transform', `
+                rotate(${(2*Math.PI/60)*second}rad)
+            `);
+            $(analogHandPaths[1]).css('transform', `
+                rotate(${(2*Math.PI/60)*minute + (2*Math.PI/3600)*second}rad)
+            `);
+            const secondsInHour = (Date.now()/1000 % (60*60*24)) % 3600;
+            $(analogHandPaths[2]).css('transform', `
+                rotate(${(2*Math.PI/12)*(hour) + (2*Math.PI/12/60/60)*(secondsInHour)}rad)
+            `);
+        }, 1000);
+    });
 }
 
 // Initialise other clock visuals,
@@ -83,39 +110,39 @@ window.onload = function() {
     clocks.forEach(clock => {
         const clockStyle = window.getComputedStyle(clock); // return object containing all CSS properties  
         const innerCircle = clock.querySelector("#inner-clock-circle");
-        let width = clockStyle.width;
+        const width = clockStyle.width;
         
         // Initialise clock hands as paths relative to the top of the parent frame
-        var analogClockHands = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        const analogClockHands = document.createElementNS("http://www.w3.org/2000/svg", "g");
         clock.appendChild(analogClockHands);
-        var mainHandStyles = {
+        const mainHandStyles = {
             fill: "none",
             stroke: "black",
             "stroke-width": "1px",
         }
-        drawLine(
-            clock, $(clock).attr('height')/2 - 40,
+        createLine( // Second hand
+            clock, $(clock).attr('height')/2 - 42,
             {
                 fill: "none",
                 stroke: "red",
                 "stroke-width": "1px",
             }
         )
-        drawLine(
-            clock, $(clock).attr('height')/2 - 40,
+        createLine( // Minute hand
+            clock, $(clock).attr('height')/2 - 42,
             mainHandStyles
         )
-        drawLine( // Hour hand
-            clock, $(clock).attr('height')/2 - 35,
+        createLine( // Hour hand
+            clock, $(clock).attr('height')/2 - 37,
             mainHandStyles
         )
         
         // Creating and positioning the clock numbers
-        var clockNumberGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        const clockNumberGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
         clock.appendChild(clockNumberGroup);
         async function addClockNumberText(group, iterNo){
-            let edgeOffset = 7;
-            var textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            const edgeOffset = 7;
+            const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
             const offset = await clockTextOffset(clock, iterNo, edgeOffset);
             $(textElement).attr({
                 'fill': '#636363',
@@ -129,25 +156,13 @@ window.onload = function() {
         for (let i = 1; i < 13; i++){
             addClockNumberText(clockNumberGroup, i);
         }
-        
-        // Formatting the timezone data (TEST for now)
-        formatTimezoneData();
-        console.log("Done clock");
     });
+    // Formatting the timezone data
+    formatTimezoneData();
+    setInterval(() => {
+        formatTimezoneData();
+    }, 1000)
+    // Position clock hands and set rotate event
+    transformClockHands();
+    console.log("Done clock");
 }
-
-// TODO: ALL BELOW ->
-//
-// If not available, hide clients clock and reposition aica clock
-//
-// Apply initial transform values to the second hand to the location it needs to be at
-//
-// Await new user aica time and fetch new client time from async every second
-//
-// Update the 24 hour time format text at the bottom
-//
-// Transform the second hand by 1/60th of amount of the frame every second
-//
-// Transform the minute hand by 1/3600th of amount of the frame every second
-//
-// Transform the hour hand by 1/43200 of amount of the frame every second

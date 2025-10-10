@@ -27,6 +27,11 @@ h1 {
   font-size: 44px;
 }
 
+svg * {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
 /* Defines properties of the header nav with page links */
 header nav {
   display: flex;
